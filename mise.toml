@@ -1,0 +1,31 @@
+[tools]
+go = "1.24"
+"go:github.com/air-verse/air" = "latest"
+"go:github.com/k1LoW/runn/cmd/runn" = "latest"
+"go:github.com/sqldef/sqldef/cmd/psqldef" = "latest"
+
+[tasks]
+[tasks.up]
+description = "ローカルDBを起動する"
+run = "docker compose up -d"
+
+[tasks.dev]
+description = "APIサーバー開発用"
+depends = ["up"]
+run = """
+air --build.cmd='go build -o /tmp/api-server cmd/api-server/main.go' \
+    --build.bin='/tmp/api-server'
+"""
+
+[tasks.build]
+description = "APIサーバーをビルドする"
+run = "go build -o /tmp/api-server cmd/api-server/main.go"
+
+[tasks.runn]
+description = "APIテストを実行する（シナリオ確認用）"
+depends = ["up"]
+run = "runn run cmd/apitest/scenario/example.yaml"
+
+[tasks.apitest]
+description = "APIテストを実行する(go test)"
+run = "go test -v ./cmd/apitest/..."

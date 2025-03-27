@@ -1,0 +1,31 @@
+desc: APIテストサンプル
+
+runners:
+  req: http://localhost:8080
+
+steps:
+  create_user:
+    desc: ユーザーを作成する
+    req:
+      /users:
+        post:
+          body:
+            application/json:
+              name: "test"
+  get_users:
+    desc: ユーザーを取得する
+    req:
+      /users:
+        get:
+          body: null
+    test:
+      current.res.status == 200 &&
+      len(current.res.body.users) >= 1
+  external_request:
+    desc: 外部APIを呼び出す
+    req:
+      /external-request:
+        get:
+          body: null
+    test:
+      current.res.status == 200
