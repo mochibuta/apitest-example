@@ -1,7 +1,6 @@
 package apiserver
 
 import (
-	"context"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -68,7 +67,7 @@ func migrateDB(cfg Config) error {
 	return nil
 }
 
-func InitServer(ctx context.Context) (*gin.Engine, error) {
+func InitServer() (*gin.Engine, error) {
 	var cfg Config
 	if err := env.Parse(&cfg); err != nil {
 		return nil, err
@@ -112,7 +111,7 @@ func InitServer(ctx context.Context) (*gin.Engine, error) {
 	})
 
 	// example: userを作成するエンドポイント
-	r.POST("/users", func(c *gin.Context) {
+	r.POST("/user", func(c *gin.Context) {
 
 		var user User
 		err := c.ShouldBindJSON(&user)

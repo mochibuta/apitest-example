@@ -1,16 +1,13 @@
 package main
 
 import (
-	"context"
 	"log"
 
 	apiserver "github.com/mochibuta/apitest-example/cmd/api-server/server"
 )
 
 func main() {
-	ctx := context.Background()
-
-	srv, err := apiserver.InitServer(ctx)
+	srv, err := apiserver.InitServer()
 	if err != nil {
 		log.Fatal(err)
 	}

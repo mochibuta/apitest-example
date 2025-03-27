@@ -7,7 +7,7 @@ steps:
   create_user:
     desc: ユーザーを作成する
     req:
-      /users:
+      /user:
         post:
           body:
             application/json:

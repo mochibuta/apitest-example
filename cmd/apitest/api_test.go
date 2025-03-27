@@ -64,7 +64,7 @@ func TestAPISenario(t *testing.T) {
 	mockServer := setupMockServer(t)
 	defer mockServer.Close()
 
-	srv, err := apiserver.InitServer(t.Context())
+	srv, err := apiserver.InitServer()
 	if err != nil {
 		t.Fatal(err)
 	}
