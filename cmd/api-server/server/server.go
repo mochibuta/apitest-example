@@ -27,10 +27,6 @@ type Config struct {
 	APIPort        string `env:"API_PORT" envDefault:"8080"`
 }
 
-type AppHandler struct {
-	DB *sql.DB
-}
-
 type User struct {
 	ID   int    `json:"id"`
 	Name string `json:"name"`
